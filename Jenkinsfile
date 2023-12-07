@@ -18,17 +18,22 @@ pipeline {
             }
         }
 
-        stage('Copying war file') {
-            steps {
-                echo "Copying war file"
-                       sh 'sudo cp -v **/target/*.war /opt/tomcat/webapps/'
-
-            }
-        }
-
         stage('Deploy to Server') {
             steps {
-            deploy adapters: [tomcat9(credentialsId: '6414a1d2-f285-4e37-8439-908f9590548a', path: '', url: 'http://65.2.170.40:9090/')], contextPath: 'JenkinsWar', war: '"**/*.war"'
+                script {
+                    def tomcatAdapters = [
+                        [$class: 'Tomcat9xAdapter', credentialsId: '6414a1d2-f285-4e37-8439-908f9590548a', path: '', url: 'http://65.2.170.40:9090/']
+                        // Add more adapters if needed
+                    ]
+
+                    def deployParams = [
+                        adapters: tomcatAdapters,
+                        contextPath: 'JenkinsWar',  // Adjust context path as needed
+                        war: '**/*.war'
+                    ]
+
+                    step([$class: 'CargoContainerPublisher', deployer: [$class: 'Tomcat9xRemoteDeployer', parameters: deployParams]])
+                }
             }
         }
     }
