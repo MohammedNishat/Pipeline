@@ -21,8 +21,8 @@ pipeline {
         stage('Copying war file') {
             steps {
                 echo "Copying war file"
-                sh 'chmod o+w /opt/tomcat/webapps/'  // Optional: Adjust permissions if needed
-                sh 'cp -v **/target/*.war /opt/tomcat/webapps/'
+                       sh 'sudo cp -v **/target/*.war /opt/tomcat/webapps/'
+
             }
         }
 
