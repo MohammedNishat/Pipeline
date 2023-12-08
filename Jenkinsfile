@@ -18,21 +18,17 @@ pipeline {
             }
         }
 
-        stage('Deploy to Server') {
+        stage('Deploy') {
             steps {
+                echo "Deploying the artifact to Tomcat"
                 script {
-                    def tomcatAdapters = [
-                        [$class: 'Tomcat9xAdapter', credentialsId: '6414a1d2-f285-4e37-8439-908f9590548a', path: '', url: 'http://65.2.170.40:9090/']
-                        // Add more adapters if needed
-                    ]
+                    def tomcatCredentialsId = '0c5f1030-10b2-4491-bb6e-d0676790f256'
+                    def tomcatUrl = 'http://15.206.205.119:9090/'
+                    def warFile = 'target/*.war'
 
-                    def deployParams = [
-                        adapters: tomcatAdapters,
-                        contextPath: 'JenkinsWar',  // Adjust context path as needed
-                        war: '**/*.war'
-                    ]
-
-                    step([$class: 'CargoContainerPublisher', deployer: [$class: 'Tomcat9xRemoteDeployer', parameters: deployParams]])
+                    tomcat9Deploy adapters: [tomcat9(credentialsId: tomcatCredentialsId, path: '', url: tomcatUrl)],
+                                contextPath: null,
+                                war: warFile
                 }
             }
         }
