@@ -24,7 +24,7 @@ pipeline {
                 script {
                     def tomcatUrl = 'http://15.206.205.119:9090'
                     def warFile = 'target/*.war'
-                    def tomcatManagerCredentials = 'nishat:nishat'  
+                    def tomcatManagerCredentials = 'nishat1:nishat'  
 
                     sh """
                         curl --upload-file ${warFile} \
