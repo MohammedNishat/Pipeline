@@ -8,7 +8,6 @@ pipeline {
         TOMCAT_SERVER = '13.51.6.164'
         TOMCAT_PORT = '9090'
         TOMCAT_CREDENTIALS_ID = '21f67f4c-1b60-4cd3-8baa-43e963a1b259' // Jenkins credentials ID for Tomcat authentication
-        DEPLOY_PATH = '/Jenkins'
     }
 
     stages {
@@ -25,7 +24,7 @@ pipeline {
             steps {
                 script {
                     // Construct the deployment URL
-                    def deployUrl = "http://${TOMCAT_USER}:${TOMCAT_PASSWORD}@${TOMCAT_SERVER}:${TOMCAT_PORT}/manager/text/deploy?path=${DEPLOY_PATH}"
+                    def deployUrl = "http://${TOMCAT_USER}:${TOMCAT_PASSWORD}@${TOMCAT_SERVER}:${TOMCAT_PORT}/manager/text/deploy?path=/Jenkins"
 
                     // Copy the WAR file to the Tomcat server using SCP or any other method
                     withCredentials([usernamePassword(credentialsId: TOMCAT_CREDENTIALS_ID, passwordVariable: 'TOMCAT_PASSWORD', usernameVariable: 'TOMCAT_USER')]) {
