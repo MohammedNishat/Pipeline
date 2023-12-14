@@ -26,7 +26,7 @@ pipeline {
                     // Copy the WAR file to the Tomcat server using SCP or any other method
                     withCredentials([usernamePassword(credentialsId: TOMCAT_CREDENTIALS_ID, passwordVariable: 'TOMCAT_PASSWORD', usernameVariable: 'TOMCAT_USER')]) {
                         // Construct the deployment URL within the withCredentials block
-                        def deployUrl = "http://${TOMCAT_USER}:${TOMCAT_PASSWORD}@${TOMCAT_SERVER}:${TOMCAT_PORT}/manager/text/deploy?path=/var/lib/jenkins/workspace/Deploy"
+                        def deployUrl = "http://${TOMCAT_USER}:${TOMCAT_PASSWORD}@${TOMCAT_SERVER}:${TOMCAT_PORT}/manager/text/deploy?path=/var/lib/jenkins/workspace/Deploy/target/*.war"
 
                         // Log a message indicating a successful connection
                         sh "echo 'Connection successful'"
