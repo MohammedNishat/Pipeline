@@ -25,7 +25,7 @@ pipeline {
                 script {
                     // Copy the WAR file to the Tomcat server using SCP or any other method
                     withCredentials([usernamePassword(credentialsId: TOMCAT_CREDENTIALS_ID, passwordVariable: 'TOMCAT_PASSWORD', usernameVariable: 'TOMCAT_USER')]) {
-                        sh "scp target/*.war ${TOMCAT_USER}@${TOMCAT_SERVER}:/opt/tomcat/webapps/Jenkins.war"
+                        sh "scp -i //home/ec2-user target/JenkinsWar.war nishat@13.51.6.164:/opt/tomcat/webapps/Jenkins.war"
                     }
 
                     // Trigger Tomcat to deploy the WAR file
