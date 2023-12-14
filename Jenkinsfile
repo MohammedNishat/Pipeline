@@ -5,9 +5,9 @@
     }
 
     environment {
-        TOMCAT_SERVER = 'http://13.233.132.145:9090/'
+        TOMCAT_SERVER = 'http://13.51.6.164:9090/'
         TOMCAT_PORT = '9090'
-        TOMCAT_CREDENTIALS_ID = deploy adapters: [tomcat9(credentialsId: '14b5d037-429a-4f4c-b372-fe52dd683584', path: '', url: 'http://13.233.132.145:9090/')], contextPath: null, war: '\'**/*.war\'' // Jenkins credentials ID for Tomcat authentication
+        TOMCAT_CREDENTIALS_ID = deploy adapters:'deploy adapters: [tomcat9(credentialsId: '21f67f4c-1b60-4cd3-8baa-43e963a1b259', path: '', url: 'http://13.51.6.164:9090/')], contextPath: null, war: '"**/*.war"'' // Jenkins credentials ID for Tomcat authentication
     }
 
     stages {
