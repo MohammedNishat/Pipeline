@@ -1,7 +1,7 @@
 pipeline {
     agent any
     tools {
-        maven 'local_home'
+        maven 'maven'
     }
 
     environment {
