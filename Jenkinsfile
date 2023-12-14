@@ -29,6 +29,7 @@ pipeline {
                     }
 
                     // Trigger Tomcat to deploy the WAR file
+                    sh "echo 'connection succesfull' "
                     sh "curl --upload-file target/*.war http://${TOMCAT_USER}:${TOMCAT_PASSWORD}@${TOMCAT_SERVER}:${TOMCAT_PORT}/manager/text/deploy?path=/Jenkins"
                 }
             }
